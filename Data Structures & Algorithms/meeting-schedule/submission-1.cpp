@@ -1,0 +1,35 @@
+/**
+ * Definition of Interval:
+ * class Interval {
+ * public:
+ *     int start, end;
+ *     Interval(int start, int end) {
+ *         this->start = start;
+ *         this->end = end;
+ *     }
+ * }
+ */
+
+class Solution {
+public:
+    bool canAttendMeetings(vector<Interval>& intervals) {
+        std::sort(intervals.begin(), intervals.end(), [](const Interval& a, const Interval& b) {
+            return a.start < b.start;
+        });
+        
+        int prevEnd = -1;
+        for (auto& interval: intervals) {
+            if (prevEnd > interval.start) {
+                return false;
+            }
+
+            prevEnd = interval.end;
+        }
+
+        return true;
+    }
+};
+
+// sort
+
+// check if overlap
